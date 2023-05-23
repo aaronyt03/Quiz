@@ -16,14 +16,10 @@
         </header>
         <main>
             <div class="container">
-                <h2>Gen 1 Knowledge</h2>
-                <p>The following is multiple choice is to test your Generation 1 Pokemon knowledge!</p>
-                <ul>
-                    <li><strong>Number of Questions: </strong>5</li>
-                    <li><strong>Type: </strong>Multiple Choice</li>
-                    <li><strong>Estimated Time: </strong>4 Minutes</li>
-                </ul>
-                <a href="question.php?n=1" class="start">Begin Quiz</a>
+               <h2>You're Done!</h2>
+               <p>Congrats! You have completed the test</p>
+               <p>Final Score: 5</p>
+               <a href="question.php?n=1" class="start">Take Again</a>
             </div>
         </main>
         <footer>
