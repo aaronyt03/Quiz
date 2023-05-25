@@ -3,8 +3,14 @@
 // set question number
 $number = (int) $_GET['n'];
 
+// get total questions
+$query = "SELECT * FROM questions";
+// get result
+$results = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
+$total = $results -> num_rows;
+
 // get question
-$query = "SELECT * FROM questions
+$query = "SELECT * FROM `questions`
 WHERE question_number = $number";
 
 // get result
@@ -13,7 +19,7 @@ $result = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
 $question = $result->fetch_assoc();
 
 // get choices
-$query = "SELECT * FROM choices
+$query = "SELECT * FROM `choices`
 WHERE question_number = $number";
 
 // get result
@@ -38,7 +44,7 @@ $choices = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
         </header>
         <main>
             <div class="container">
-                <div class="current">Question 1 of 5</div>
+                <div class="current">Question <?php echo $question['question_number']; ?> of <?php echo $total; ?></div>
                 <p class="question">
                     <?php echo $question['text']; ?>
                 </p>
@@ -47,12 +53,10 @@ $choices = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
                         <?php while($row = $choices -> fetch_assoc()): ?>
                             <li><input name="choice" type="radio" value="<?php echo $row['id']; ?>"><?php echo $row['text']; ?></li>
                         <?php endwhile ?>
-                        <!-- 
-                        <li><input name="choice" type="radio" value="1">Meowth</li>
-                        <li><input name="choice" type="radio" value="1">Squirtle</li>
-                        <li><input name="choice" type="radio" value="1">Mew</li> -->
+                        
                     </ul>
                     <input type="submit" value="Submit">
+                    <input type="hidden" name="number" value="<?php echo $number; ?>" >
                 </form>
             </div>
         </main>

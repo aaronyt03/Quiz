@@ -4,8 +4,8 @@
 $query = "SELECT * FROM questions";
 
 // get result
-$result = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
-$total = $result -> num_rows;
+$results = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
+$total = $results -> num_rows;
 
 ?>
 <!DOCTYPE html>
