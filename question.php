@@ -1,3 +1,25 @@
+<?php include 'database.php'; ?>
+<?php 
+// set question number
+$number = (int) $_GET['n'];
+
+// get question
+$query = "SELECT * FROM questions
+WHERE question_number = $number";
+
+// get result
+$result = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
+
+$question = $result->fetch_assoc();
+
+// get choices
+$query = "SELECT * FROM choices
+WHERE question_number = $number";
+
+// get result
+$choices = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,14 +40,17 @@
             <div class="container">
                 <div class="current">Question 1 of 5</div>
                 <p class="question">
-                    Which of the following is not a starter Pokemon?
+                    <?php echo $question['text']; ?>
                 </p>
                 <form method= "post" action="process.php">
                     <ul class="choices">
-                        <li><input name="choice" type="radio" value="1">Bulbasaur</li>
+                        <?php while($row = $choices -> fetch_assoc()): ?>
+                            <li><input name="choice" type="radio" value="<?php echo $row['id']; ?>"><?php echo $row['text']; ?></li>
+                        <?php endwhile ?>
+                        <!-- 
                         <li><input name="choice" type="radio" value="1">Meowth</li>
                         <li><input name="choice" type="radio" value="1">Squirtle</li>
-                        <li><input name="choice" type="radio" value="1">Mew</li>
+                        <li><input name="choice" type="radio" value="1">Mew</li> -->
                     </ul>
                     <input type="submit" value="Submit">
                 </form>

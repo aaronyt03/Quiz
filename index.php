@@ -1,4 +1,13 @@
 <?php include 'database.php'; ?>
+<?php 
+// get total questions
+$query = "SELECT * FROM questions";
+
+// get result
+$result = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
+$total = $result -> num_rows;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,9 +29,9 @@
                 <h2>Gen 1 Knowledge</h2>
                 <p>The following is multiple choice is to test your Generation 1 Pokemon knowledge!</p>
                 <ul>
-                    <li><strong>Number of Questions: </strong>5</li>
+                    <li><strong>Number of Questions: </strong><?php echo $total; ?></li>
                     <li><strong>Type: </strong>Multiple Choice</li>
-                    <li><strong>Estimated Time: </strong>4 Minutes</li>
+                    <li><strong>Estimated Time: </strong><?php echo $total * .5 ?> Minutes</li>
                 </ul>
                 <a href="question.php?n=1" class="start">Begin Quiz</a>
             </div>
