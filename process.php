@@ -1,4 +1,4 @@
-<?php include 'database.php' ?>
+<?php include 'database.php'; ?>
 <?php session_start(); ?>
 <?php  
 // check score
@@ -17,10 +17,11 @@ if($_POST){
     $results = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
     $total = $results -> num_rows;
 
+
     // get correct choice
     $query = "SELECT * FROM `choices`
-    WHERE question_number = $number AND is_correct = 1";
-    
+            WHERE question_number = $number AND is_correct = 1";
+
     // get result
     $result = $mysqli -> query($query) or die($mysqli -> error.__LINE__);
 
@@ -35,11 +36,8 @@ if($_POST){
         // Answer is correct
         $_SESSION['score']++;
     }
-    // echo $number;
-    // die();
-
-    // check final question
-    if($number === $total){
+    // check if final question
+    if($number == $total){
         header("Location: final.php");
         exit();
     }else{
